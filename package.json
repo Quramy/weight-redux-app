@@ -4,9 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "flow": "flow",
+    "dev": "webpack-dev-server --port 8000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-env": "^2.4.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.65.0",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "styled-components": "^3.1.6"
+  }
 }

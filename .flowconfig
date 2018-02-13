@@ -1,0 +1,14 @@
+[ignore]
+node_modules/*
+
+[include]
+front/**/*.js
+back/**/*.js
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]
