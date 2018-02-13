@@ -1,4 +1,4 @@
-# weight redux app
+# weight redux app [![CircleCI](https://circleci.com/gh/Quramy/weight-redux-app.svg?style=svg)](https://circleci.com/gh/Quramy/weight-redux-app)
 
 ## development
 
