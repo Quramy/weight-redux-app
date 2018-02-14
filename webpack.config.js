@@ -3,10 +3,11 @@ const path = require('path');
 module.exports = {
   entry: {
     main: './front/index',
+    auth: './auth/index',
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'bundle.[name].js',
   },
   module: {
     rules: [
@@ -19,6 +20,10 @@ module.exports = {
   },
   devtool: 'sourcemap',
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/login\/?$/, to: '/login.html' },
+      ],
+    },
   },
 };
