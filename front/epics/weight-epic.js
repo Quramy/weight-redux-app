@@ -4,6 +4,8 @@ import type { MiddlewareAPI } from 'redux';
 import type { State } from '../reducers';
 import type { Actions } from '../actions/weight-input-actions';
 import { Observable } from 'rxjs/Observable';
+import { push } from 'react-router-redux';
+import { combineEpics } from 'redux-observable';
 
 // TODO 
 // replace calling API
@@ -14,14 +16,20 @@ function submitWeight(weight: number) {
   });
 }
 
-const weightEpic = (action$: Observable<Actions>, store: MiddlewareAPI<State, Actions>) => {
-  const { weightInput } = store.getState();
+const submitEpic = (action$: Observable<Actions>, store: MiddlewareAPI<State, Actions>) => {
   return action$
     .filter(a => a.type === 'SUBMIT_WEIGHT')
-    .switchMap(() => submitWeight(weightInput.weight))
+    .switchMap(() => submitWeight(store.getState().weightInput.weight))
     .map(() => ({ type: 'RESPONSE_SUBMIT_WEIGHT' }))
     .do(x => console.log(x))
   ;
 };
 
-export default weightEpic;
+const submitDoneEpic = (action$: Observable<Actions>) => {
+  return action$
+    .filter(a => a.type === 'RESPONSE_SUBMIT_WEIGHT')
+    .map(() => push('/'))
+  ;
+};
+
+export default combineEpics(submitEpic, submitDoneEpic);
