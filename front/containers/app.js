@@ -12,7 +12,7 @@ const App = (props) => (
 );
 
 const mapStateToProps = (state: State): { weightStr: string } => {
-  return state.weightInput;  // TODO how strict typed?
+  return state.weightInput;
 };
 
 const mapDispatchToPropos = (dispatch) => {

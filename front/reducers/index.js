@@ -11,12 +11,16 @@ export type WeightInputState = {
   weightStr: string;
 };
 
-const initialState = ({
+export type State = {
+  weightInput: WeightInputState;
+};
+
+const initialState = {
   weight: 0,
   weightStr: '',
-} : WeightInputState);
+};
 
-function weightInput(state = initialState, action: Actions) {
+function weightInput(state: WeightInputState = initialState, action: Actions) {
   switch (action.type) {
     case 'CLEAR_ALL':
       return initialState;
@@ -31,13 +35,6 @@ function weightInput(state = initialState, action: Actions) {
       return state;
   }
 }
-
-// const reducer = combineReducers({
-//   weightInput,
-// });
-
-type ExtractReturnType = <R>(() => R) => R;
-export type State = $Call<ExtractReturnType, reducer>;
 
 const reducers = {
   weightInput,
