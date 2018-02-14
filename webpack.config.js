@@ -18,4 +18,7 @@ module.exports = {
     ],
   },
   devtool: 'sourcemap',
+  devServer: {
+    historyApiFallback: true,
+  },
 };

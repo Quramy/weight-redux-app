@@ -32,11 +32,14 @@ function weightInput(state = initialState, action: Actions) {
   }
 }
 
-const reducer = combineReducers({
-  weightInput,
-});
+// const reducer = combineReducers({
+//   weightInput,
+// });
 
 type ExtractReturnType = <R>(() => R) => R;
 export type State = $Call<ExtractReturnType, reducer>;
 
-export default reducer;
+const reducers = {
+  weightInput,
+};
+export default reducers;
