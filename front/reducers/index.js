@@ -21,16 +21,33 @@ const initialState = {
 };
 
 function weightInput(state: WeightInputState = initialState, action: Actions) {
+  let { weightStr } = state;
   switch (action.type) {
     case 'CLEAR_ALL':
       return initialState;
-    case 'ADD_NUMBER':
-      const weightStr = state.weightStr + action.body.n;
+    case 'DEL':
+      weightStr = weightStr.length ? weightStr.slice(0, weightStr.length - 1) : '';
       return {
         ...state,
         weightStr,
         weight: +weightStr,
       };
+    case 'ADD_NUMBER':
+      weightStr = state.weightStr + action.body.n;
+      return {
+        ...state,
+        weightStr,
+        weight: +weightStr,
+      };
+    case 'ADD_DOT':
+      if (/\./.test(weightStr)) {
+        return state;
+      } else {
+        return {
+          ...state,
+          weightStr: weightStr + '.',
+        };
+      }
     default:
       return state;
   }
