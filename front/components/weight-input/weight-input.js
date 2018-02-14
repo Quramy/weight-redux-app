@@ -4,13 +4,15 @@ import React from 'react';
 
 type WeightInputProps = {
   weightStr: string;
+  isSubmitting: boolean;
   clearAll: () => void;
   del: () => void;
   addDot: () => void;
   addNumber: (n: number) => void;
+  submit: () => void;
 };
 
-const WeightInput = ({ weightStr, addNumber, clearAll, del, addDot }: WeightInputProps) => (
+const WeightInput = ({ weightStr, addNumber, clearAll, del, addDot, submit, isSubmitting }: WeightInputProps) => (
   <div>
     <div>weight: {weightStr}</div>
     <button onClick={() => clearAll()}>clear</button>
@@ -39,6 +41,7 @@ const WeightInput = ({ weightStr, addNumber, clearAll, del, addDot }: WeightInpu
         </tr>
       </tbody>
     </table>
+    <button onClick={() => submit()}>{isSubmitting ? 'isSubmitting' : 'submit'}</button>
   </div>
 );
 

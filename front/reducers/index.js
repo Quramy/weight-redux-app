@@ -7,6 +7,7 @@ import type {
 } from '../actions/weight-input-actions';
 
 export type WeightInputState = {
+  isSubmitting: boolean;
   weight: number;
   weightStr: string;
 };
@@ -16,6 +17,7 @@ export type State = {
 };
 
 const initialState = {
+  isSubmitting: false,
   weight: 0,
   weightStr: '',
 };
@@ -48,6 +50,16 @@ function weightInput(state: WeightInputState = initialState, action: Actions) {
           weightStr: weightStr + '.',
         };
       }
+    case 'SUBMIT_WEIGHT':
+      return {
+        ...state,
+        isSubmitting: true,
+      };
+    case 'RESPONSE_SUBMIT_WEIGHT':
+      return {
+        ...state,
+        isSubmitting: false,
+      };
     default:
       return state;
   }

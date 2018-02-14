@@ -19,11 +19,21 @@ export type AddDotAction = {
   type: 'ADD_DOT';
 };
 
+export type SubmitWeightAction = {
+  type: 'SUBMIT_WEIGHT';
+}
+
+export type ResponseSubmitWeightAction = {
+  type: 'RESPONSE_SUBMIT_WEIGHT';
+}
+
 export type Actions =
   ClearAllAction |
   DelAction |
   AddNumberAction |
-  AddDotAction
+  AddDotAction |
+  SubmitWeightAction |
+  ResponseSubmitWeightAction
 ;
 
 export function clearAll(): ClearAllAction {
@@ -50,5 +60,11 @@ export function addNumber(n: number): AddNumberAction {
 export function addDot(): AddDotAction {
   return {
     type: 'ADD_DOT',
+  };
+}
+
+export function submitWeight(): SubmitWeightAction {
+  return {
+    type: 'SUBMIT_WEIGHT',
   };
 }

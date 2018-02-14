@@ -1,5 +1,6 @@
 /* @flow */
 
+import './rx-imports';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -12,11 +13,12 @@ import {
   push,
 } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
+import { createEpicMiddleware } from 'redux-observable';
 import reducers from './reducers';
 import AppRoute from './route';
+import weightEpic from './epics/weight-epic';
 
 const history = createHistory();
-const middleware = routerMiddleware(history);
 const elm = document.getElementById('app');
 
 if (elm) {
@@ -25,7 +27,7 @@ if (elm) {
       ...reducers,
       router: routerReducer,
     }),
-    applyMiddleware(middleware),
+    applyMiddleware(routerMiddleware(history), createEpicMiddleware(weightEpic)),
   );
   console.log(store);
   ReactDOM.render(
