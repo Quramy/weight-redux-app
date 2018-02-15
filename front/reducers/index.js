@@ -1,6 +1,6 @@
 /* @flow */
 
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
 
 import type {
   Actions,
@@ -44,12 +44,11 @@ function weightInput(state: WeightInputState = initialState, action: Actions) {
     case 'ADD_DOT':
       if (/\./.test(weightStr)) {
         return state;
-      } else {
-        return {
-          ...state,
-          weightStr: weightStr + '.',
-        };
       }
+      return {
+        ...state,
+        weightStr: `${weightStr}.`,
+      };
     case 'SUBMIT_WEIGHT':
       return {
         ...state,

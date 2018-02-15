@@ -1,5 +1,5 @@
 /* @flow */
-
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 
 type WeightInputProps = {
@@ -35,7 +35,7 @@ const WeightInput = ({ weightStr, addNumber, clearAll, del, addDot, submit, isSu
           <td onClick={() => addNumber(3)}>3</td>
         </tr>
         <tr>
-          <td></td>
+          <td />
           <td onClick={() => addNumber(0)}>0</td>
           <td onClick={() => addDot()}>.</td>
         </tr>

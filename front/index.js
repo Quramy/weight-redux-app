@@ -1,16 +1,15 @@
 /* @flow */
+/* eslint-disable import/first */
 
 import './rx-imports';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { Route } from 'react-router';
 import {
   ConnectedRouter,
   routerReducer,
   routerMiddleware,
-  push,
 } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import { createEpicMiddleware } from 'redux-observable';
@@ -19,6 +18,8 @@ import AppRoute from './route';
 import weightEpic from './epics/weight-epic';
 
 const history = createHistory();
+
+// eslint-disable-next-line no-undef
 const elm = document.getElementById('app');
 
 if (elm) {
@@ -29,7 +30,6 @@ if (elm) {
     }),
     applyMiddleware(routerMiddleware(history), createEpicMiddleware(weightEpic)),
   );
-  console.log(store);
   ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
