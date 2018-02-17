@@ -2,6 +2,7 @@
 /* eslint-disable import/first */
 
 import './rx-imports';
+import './firebase/init';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -16,26 +17,37 @@ import { createEpicMiddleware } from 'redux-observable';
 import reducers from './reducers';
 import AppRoute from './route';
 import weightEpic from './epics/weight-epic';
+import checkAuth from './firebase/auth/check-auth';
 
 const history = createHistory();
 
-// eslint-disable-next-line no-undef
-const elm = document.getElementById('app');
+checkAuth().then(user => {
+  // eslint-disable-next-line no-undef
+  const elm = document.getElementById('app');
 
-if (elm) {
-  const store = createStore(
-    combineReducers({
-      ...reducers,
-      router: routerReducer,
-    }),
-    applyMiddleware(routerMiddleware(history), createEpicMiddleware(weightEpic)),
-  );
-  ReactDOM.render(
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <AppRoute />
-      </ConnectedRouter>
-    </Provider>,
-    elm
-  );
-}
+  if (elm) {
+    const store = createStore(
+      combineReducers({
+        ...reducers,
+        router: routerReducer,
+      }),
+      ({
+        account: {
+          me: user,
+        },
+      }: any), // FIXME
+      applyMiddleware(routerMiddleware(history), createEpicMiddleware(weightEpic)),
+    );
+    ReactDOM.render(
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <AppRoute />
+        </ConnectedRouter>
+      </Provider>,
+      elm
+    );
+  }
+}).catch(() => {
+  // eslint-disable-next-line no-undef
+  // location.href = '/login';
+});

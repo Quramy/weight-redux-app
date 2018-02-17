@@ -6,6 +6,7 @@ front/**/*.js
 back/**/*.js
 
 [libs]
+./flow-lib
 
 [lints]
 

@@ -2,6 +2,7 @@
 
 // import { combineReducers } from 'redux';
 
+import type { User } from 'firebase';
 import type {
   Actions,
 } from '../actions/weight-input-actions';
@@ -12,8 +13,13 @@ export type WeightInputState = {
   weightStr: string;
 };
 
+export type AccountState = {
+  me: User;
+};
+
 export type State = {
   weightInput: WeightInputState;
+  account: AccountState;
 };
 
 const initialState = {
@@ -21,6 +27,10 @@ const initialState = {
   weight: 0,
   weightStr: '',
 };
+
+function account(state: AccountState = { me: null }) {
+  return state;
+}
 
 function weightInput(state: WeightInputState = initialState, action: Actions) {
   let { weightStr } = state;
@@ -65,6 +75,7 @@ function weightInput(state: WeightInputState = initialState, action: Actions) {
 }
 
 const reducers = {
+  account,
   weightInput,
 };
 export default reducers;

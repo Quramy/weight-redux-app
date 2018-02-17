@@ -6,20 +6,22 @@ import { push } from 'react-router-redux';
 import { combineEpics } from 'redux-observable';
 import type { State } from '../reducers';
 import type { Actions } from '../actions/weight-input-actions';
+import { addMetric } from '../firebase/firestore/metrics';
+import { currentDateString } from '../misc/date-util';
 
-// TODO 
-// replace calling API
-// eslint-disable-next-line no-unused-vars
-function submitWeight(weight: number) {
-  return new Promise((res) => {
-    setTimeout(() => res(), 1000);
-  });
+function submitWeight(weight: number, uid: string) {
+  return addMetric({
+    date: currentDateString(),
+    type: 'weight',
+    value: weight,
+    uid,
+  })
 }
 
 const submitEpic = (action$: Observable<Actions>, store: MiddlewareAPI<State, Actions>) =>
   action$
     .filter(a => a.type === 'SUBMIT_WEIGHT')
-    .switchMap(() => submitWeight(store.getState().weightInput.weight))
+    .switchMap(() => submitWeight(store.getState().weightInput.weight, store.getState().account.me.uid))
     .map(() => ({ type: 'RESPONSE_SUBMIT_WEIGHT' }))
     // .do(x => console.log(x))
   ;
